@@ -1,0 +1,37 @@
+{
+  "envId": "{{env.ENV_ID}}",
+  "version": "2.0",
+  "$schema": "https://framework-1258016615.tcloudbaseapp.com/schema/latest.json",
+  "region": "ap-shanghai",
+  "framework": {
+    "name": "DeployApp",
+    "plugins": {
+      "nextjs": {
+        "use": "@cloudbase/framework-plugin-website",
+        "inputs": {
+          "buildCommand": "npm run build",
+          "outputPath": "out"
+        }
+      },
+      "server": {
+        "use": "@cloudbase/framework-plugin-function",
+        "inputs": {
+          "functionRootPath": "out/api/",
+          "functions": [
+            {
+              "name": "addYourApiFileHere",
+              "timeout": 5,
+              "envVariables": {},
+              "runtime": "Nodejs10.15",
+              "memory": 128,
+              "handler": "index.default"
+            }
+          ],
+          "servicePaths": {
+            "addYourApiFileHere": "/add-your-api-service-path-here"
+          }
+        }
+      }
+    }
+  }
+}
